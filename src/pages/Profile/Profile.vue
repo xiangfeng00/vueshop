@@ -2,12 +2,12 @@
   <section class="profile">
     <HeaderTop title="我的" />
     <section class="profile-number">
-      <router-link to="/login" class="profile-link">
+      <router-link :to="userInfo._id?'/userinfo':'/login'" class="profile-link">
         <div class="profile_image">
           <i class="iconfont icon-person"></i>
         </div>
         <div class="user-info">
-          <p class="user-info-top">登录/注册</p>
+          <p class="user-info-top">{{userInfo.name||'登录/注册'}}</p>
           <p>
             <span class="user-icon">
               <i class="iconfont icon-shouji icon-mobile"></i>
@@ -67,13 +67,13 @@
           </span>
         </div>
       </a>
-      <!-- 硅谷外卖会员卡 -->
+      <!-- 外卖会员卡 -->
       <a href="javascript:" class="my_order">
         <span>
           <i class="iconfont icon-vip"></i>
         </span>
         <div class="my_order_div">
-          <span>硅谷外卖会员卡</span>
+          <span>外卖会员卡</span>
           <span class="my_order_icon">
             <i class="iconfont icon-jiantou1"></i>
           </span>
@@ -94,12 +94,34 @@
         </div>
       </a>
     </section>
+    <section class="profile_my_order border-1px">
+      <button type="danger" style="width: 100%;font-size:16px" v-if="userInfo._id" @click="logout">退出登陆</button>
+    </section>
   </section>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import { MessageBox, Toast } from "mint-ui";
 import HeaderTop from "../../components/HeaderTop/HeaderTop";
 export default {
+  computed: {
+    ...mapState(["userInfo"])
+  },
+  methods: {
+    logout() {
+      MessageBox.confirm("确认退出吗?").then(
+        action => {
+          // 请求退出
+          this.$store.dispatch("logout");
+          Toast("登出完成");
+        },
+        action => {
+          console.log("点击了取消");
+        }
+      );
+    }
+  },
   components: {
     HeaderTop
   }
@@ -338,4 +360,14 @@ section.profile
   color: #bbb;
   font-size: 10px;
 }
+section .profile_my_order button{
+  text-align: center;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    background: #20a774;
+    border:0
+}
+
 </style>

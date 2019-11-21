@@ -13,7 +13,8 @@
 export default {
   props:{
     title:String
-  }
+  },
+
 };
 </script>
 
@@ -22,7 +23,7 @@ export default {
 .header {
   background-color: #02a774;
   position: fixed;
-  z-index: 100;
+  z-index: 999;
   left: 0;
   top: 0;
   width: 100%;
@@ -53,37 +54,12 @@ export default {
 section.msite {
   width: 100%;
 }
-.header {
-  background-color: #02a774;
-  position: fixed;
-  z-index: 100;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 45px;
-}
-.header .header_search {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 10%;
-  height: 50%;
-}
+
 .header .header_search .icon-sousuo {
   font-size: 25px;
   color: #fff;
 }
-.header .header_title {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%;
-  color: #fff;
-  text-align: center;
-  margin-left: -5%;
-}
+
 .header .header_title .header_title_text {
   font-size: 20px;
   color: #fff;
